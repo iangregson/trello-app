@@ -14,7 +14,7 @@
     "pretest": "npm install && npm run lint",
     "karma": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
-    "test": "npm run test-single-run && npm run protractor",
+    "test": "mocha && npm run test-single-run && npm run protractor",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
@@ -48,11 +48,14 @@
     "karma-jasmine": "0.3.6",
     "karma-junit-reporter": "0.3.8",
     "live-reload": "1.1.0",
+    "mocha": "2.3.4",
     "nodemon": "1.8.1",
     "opener": "1.4.1",
     "parallelshell": "2.0.0",
     "protractor": "2.5.1",
     "rimraf": "2.4.4",
-    "shelljs": "0.5.3"
+    "shelljs": "0.5.3",
+    "should": "7.1.1",
+    "supertest": "1.1.0"
   }
 }
