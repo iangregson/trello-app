@@ -21,7 +21,9 @@
     "protractor": "protractor e2e-tests/protractor.conf.js",
     "prebuildjs": "npm run lint && npm run test-single-run",
     "buildjs": "webpack -p",
-    "lint": "jshint ./public/**/*.js"
+    "lint": "jshint ./public/**/*.js",
+    "save": "git add . -A && git commit && git push -u github master",
+    "patch": "git add . -A && git commit -m 'version patch' && npm version patch && git push -u github master && git push heroku master"
   },
   "engines": {
     "node": "4.2.1"
