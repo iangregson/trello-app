@@ -1,10 +1,10 @@
 # my-seed-app
 
-npm install & npm run dev to get started
+npm run dev to get started
 
-npm start runs in production mode
+npm start runs the app in production mode
 
-Both need Heroku's foreman
+Both need Heroku's foreman (npm run getheroku)
 
 ---------------
 

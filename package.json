@@ -6,24 +6,26 @@
     "clean": "rimraf ./public/build",
     "start": "nf start",
     "foreman": "nf start web=1 -j Procfile_dev -p 5000",
-    "predev": "npm run lint",
-    "dev": "parallelshell 'npm run foreman' 'npm run livereload' 'open http://dev.ian:5000'",
+    "predev": "npm install && npm run lint",
+    "dev": "parallelshell 'npm run foreman' 'npm run livereload' 'opener http://dev.ian:5000'",
     "livereload": "live-reload --port 9091 .",
     "postinstall": "bower install",
     "prestart": "npm install",
     "pretest": "npm install && npm run lint",
     "karma": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
-    "test": "mocha && npm run test-single-run && npm run protractor",
+    "test": "npm run unittest && npm run protractor",
+    "unittest": "mocha && npm run test-single-run",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor e2e-tests/protractor.conf.js",
-    "prebuildjs": "npm run lint && npm run test-single-run",
+    "prebuildjs": "npm run lint && npm run unittest",
     "buildjs": "webpack -p",
     "lint": "jshint ./public/**/*.js",
     "save": "git add . -A && git commit && git push -u github master",
-    "patch": "git add . -A && git commit -m 'version patch' && npm version patch && git push -u github master && git push heroku master"
+    "patch": "git add . -A && git commit -m 'version patch' && npm version patch && git push -u github master && git push heroku master",
+    "getheroku": "opener https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up"
   },
   "engines": {
     "node": "4.2.1"
@@ -56,6 +58,7 @@
     "rimraf": "2.4.4",
     "shelljs": "0.5.3",
     "should": "7.1.1",
-    "supertest": "1.1.0"
+    "supertest": "1.1.0",
+    "webpack": "1.12.9"
   }
 }
