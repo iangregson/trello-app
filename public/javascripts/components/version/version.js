@@ -1,6 +1,6 @@
 "use strict";
-angular.module("myApp.version", [
-	"myApp.version.interpolate-filter",
-	"myApp.version.version-directive"
+angular.module("trelloApp.version", [
+	"trelloApp.version.interpolate-filter",
+	"trelloApp.version.version-directive"
 	])
 	.value("version","0.1");

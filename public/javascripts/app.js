@@ -1,10 +1,10 @@
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('trelloApp', [
   'ui.router',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.viewform',
-  'myApp.version'
+  'trelloApp.view1',
+  'trelloApp.view2',
+  'trelloApp.viewform',
+  'trelloApp.version'
 ])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   'use strict';

@@ -1,4 +1,4 @@
-# my-seed-app
+# trello-app
 
 npm run dev to get started
 

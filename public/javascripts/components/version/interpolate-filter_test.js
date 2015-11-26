@@ -1,6 +1,6 @@
 "use strict";
-describe("myApp.version module", function() {
-	beforeEach(module("myApp.version"));
+describe("trelloApp.version module", function() {
+	beforeEach(module("trelloApp.version"));
 	describe("interpolate filter", function() {
 		beforeEach(module(function($provide) {
 			$provide.value("version","TEST_VER")

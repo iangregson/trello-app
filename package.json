@@ -1,6 +1,6 @@
 {
-  "name": "my-seed-app",
-  "version": "0.0.2",
+  "name": "trello-app",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "clean": "rimraf ./public/build",
@@ -39,6 +39,7 @@
     "express": "~4.10.6",
     "less-middleware": "1.0.x",
     "morgan": "~1.5.1",
+    "node-trello": "1.1.2",
     "serve-favicon": "~2.2.0"
   },
   "devDependencies": {

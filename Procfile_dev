@@ -1,1 +1,1 @@
-web: NODE_ENV=dev APP_NAME=myApp nodemon --debug ./bin/www
+web: NODE_ENV=dev APP_NAME=trelloApp TRELLO_KEY=0ee7d0e1d9c5931ed2c8ae312c09d449 nodemon --debug ./bin/www

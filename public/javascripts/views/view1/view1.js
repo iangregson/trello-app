@@ -1,5 +1,5 @@
 "use strict";
-angular.module("myApp.view1", [ "ui.router" ] )
+angular.module("trelloApp.view1", [ "ui.router" ] )
 	.config(["$stateProvider", function($stateProvider) {
 		
 		$stateProvider
