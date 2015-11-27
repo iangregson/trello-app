@@ -23,6 +23,8 @@
     "prebuildjs": "npm run lint && npm run unittest",
     "buildjs": "webpack -p",
     "lint": "jshint ./public/**/*.js",
+    "presave": "npm run unittest",
+    "prepatch": "npm run unittest",
     "save": "git add . -A && git commit && git push -u github master",
     "patch": "git add . -A && git commit -m 'version patch' && npm version patch && git push -u github master && git push heroku master",
     "getheroku": "opener https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up"

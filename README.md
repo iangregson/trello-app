@@ -8,4 +8,7 @@ Both need Heroku's foreman (npm run getheroku)
 
 ---------------
 
-If deploying, you need to set a environment / config variable in Heroku called APP_NAME and set it the name of the Angular App. 
+If deploying, you need to set environment / config variables in Heroku: 
+
+- APP_NAME - name of the Angular App to load
+- TRELLO_KEY - your Trello developers public key
