@@ -42,7 +42,9 @@
     "less-middleware": "1.0.x",
     "morgan": "~1.5.1",
     "node-trello": "1.1.2",
-    "serve-favicon": "~2.2.0"
+    "oauth": "0.9.14",
+    "serve-favicon": "~2.2.0",
+    "wagner-core": "0.2.0"
   },
   "devDependencies": {
     "jasmine-core": "2.3.4",

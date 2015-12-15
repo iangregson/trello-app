@@ -4,12 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var trelloApi = require('./routes/trelloApi');
+var w = require('wagner-core');
 
 var app = express();
+
+require('./dependencies')(w);
+w.invoke(require('./auth'), { app: app });
 
 //concurrency fallback
 const CONCURRENCY = process.env.WEB_CONCURRENCY || 1;
@@ -27,9 +27,9 @@ app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/trello-api', trelloApi);
+app.use('/', require('./routes'));
+app.use('/users', require('./routes/users'));
+app.use('/trello-api', require('./routes/trelloApi')(w));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

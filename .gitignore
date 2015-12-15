@@ -3,3 +3,5 @@ node_modules
 /public/bower/
 .npm-debug.log
 .trello
+.env
+Procfile_dev

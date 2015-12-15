@@ -1,8 +1,13 @@
 var express = require('express');
-var router = express.Router();
-var Trello = require('node-trello');
 
-var t = new Trello(process.env.TRELLO_KEY, "1a9cda1ae015e92a9101e0405cc9ab42df85222c17971295c9108640c77a1dec")
+module.exports = function(w) {
+
+var router = express.Router();
+
+// to do - make something like this work so that the user is autmatically directed to /login if there's no token
+//router.use(function(req, res, next) {
+//	return isLoggedIn(req, res, next);
+//});
 
 /* GET root. */
 router.get('/', function(req, res) {
@@ -15,19 +20,46 @@ router.get('/', function(req, res) {
 });
 
 /* GET talk to Trello. */
-router.get('/me', function(req, res) {
-	t.get("/1/members/me", function(err, data) {
-		if (err) throw err;
-		res.json({
-			title: 'me@trello',
-			data: data
+router.get('/me', w.invoke(function(Trello) {
+	return function(req, res) {
+	
+		Trello.get("/1/members/me", function(err, data) {
+			if (err) throw err;
+			res.json({
+				title: 'me@trello',
+				data: data
+			});
 		});
-	});
+	};
+}));
+
+/* GET talk to Trello. */
+router.get('/me/boards', function(req, res, next) {
+	if (req.cookies.token) { // do this better! Some kind of middleware on the routes
+		var t = new Trello(process.env.TRELLO_KEY, req.cookies.token);
+		t.get("/1/members/me", function(err, data) {
+			if (err) throw err;
+			res.json({
+				title: 'me@trello',
+				data: data
+			});
+		});
+	} else {
+		res.json({
+			title: 'boards@trello'
+		});
+	}
 });
 
-/* GET talk to login to Trello. */
-router.get('/login', function(req, res) {
-	res.redirect('https://trello.com/1/connect?key=' + process.env.TRELLO_KEY + '&name=Ian%27s%20Trello%20App&response_type=token');
-});
 
-module.exports = router;
+function isLoggedIn(req, res, next) {
+
+    if (req.cookies.token) return next();
+    	
+    return res.redirect('/trello-api/login');
+
+}
+
+	return router;
+
+}
