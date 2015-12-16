@@ -44,6 +44,7 @@
     "node-trello": "1.1.2",
     "oauth": "0.9.14",
     "serve-favicon": "~2.2.0",
+    "underscore": "1.8.3",
     "wagner-core": "0.2.0"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('underscore');
 
 module.exports = function(w) {
 
@@ -25,40 +26,44 @@ router.get('/me', w.invoke(function(Trello) {
 	
 		Trello.get("/1/members/me", function(err, data) {
 			if (err) throw err;
-			res.json({
+			
+			var feed = {
 				title: 'me@trello',
-				data: data
-			});
+				boardIDs: data.idBoards || 'No boards!',
+				username: data.username,
+				url: data.url
+			};
+
+			res.json(feed);
 		});
 	};
 }));
 
-/* GET talk to Trello. */
-router.get('/me/boards', function(req, res, next) {
-	if (req.cookies.token) { // do this better! Some kind of middleware on the routes
-		var t = new Trello(process.env.TRELLO_KEY, req.cookies.token);
-		t.get("/1/members/me", function(err, data) {
+/* GET cards from Trello board. */
+router.get('/me/cards/:boardID', w.invoke(function(Trello) {
+	return function(req, res) {
+
+		Trello.get("/1/boards/" + req.params.boardID + "/cards?fields=name,idList,url", function(err, data) {
 			if (err) throw err;
-			res.json({
-				title: 'me@trello',
-				data: data
-			});
+			
+			var feed = {
+			title: 'cards@' + req.params.boardID + '@trello',
+			cards: data
+			};
+
+			res.json(feed);
 		});
-	} else {
-		res.json({
-			title: 'boards@trello'
-		});
-	}
-});
+	};
+}));
 
 
-function isLoggedIn(req, res, next) {
-
-    if (req.cookies.token) return next();
-    	
-    return res.redirect('/trello-api/login');
-
-}
+//function isLoggedIn(req, res, next) {
+//
+//    if (req.cookies.token) return next();
+//    	
+//    return res.redirect('/trello-api/login');
+//
+//}
 
 	return router;
 

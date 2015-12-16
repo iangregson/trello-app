@@ -51,22 +51,22 @@ describe("Routes.trelloApi GET me unit test",function(){
   });
 });
 
-describe("Routes.trelloApi GET boards unit test",function(){
+describe("Routes.trelloApi GET cards unit test",function(){
 
   // #1 should return json info about my trello boards
 
-  it("should return json message",function(done){
+  it("should return json message with a cards object",function(done){
 
     // calling home page api
     server
-    .get("/trello-api/me/boards")
+    .get("/trello-api/me/cards/55a24b0e333f1efad9f26073")
     .expect("Content-type",/json/)
     .expect(200) // THis is HTTP response
     .end(function(err,res){
       // HTTP status should be 200
       res.status.should.equal(200);
       // Error key should be false.
-      res.body.title.should.equal("boards@trello");
+      res.body.cards.should.be.ok;
       done();
     });
   });
