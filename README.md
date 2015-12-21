@@ -1,5 +1,7 @@
 # trello-app
 
+Create Procfile_dev with environment variables
+
 npm run dev to get started
 
 npm start runs the app in production mode

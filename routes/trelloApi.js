@@ -24,15 +24,15 @@ router.get('/', function(req, res) {
 router.get('/me', w.invoke(function(Trello) {
 	return function(req, res) {
 	
-		Trello.get("/1/members/me", function(err, data) {
+		Trello.get("/1/members/me", { boards: "all", board_fields: "name" }, function(err, data) {
 			if (err) throw err;
-			
+
 			var feed = {
-				title: 'me@trello',
-				boardIDs: data.idBoards || 'No boards!',
+				name: data.fullName,
 				username: data.username,
-				url: data.url
-			};
+				url: data.url,
+				boards: data.boards
+			}
 
 			res.json(feed);
 		});
@@ -41,21 +41,48 @@ router.get('/me', w.invoke(function(Trello) {
 
 /* GET cards from Trello board. */
 router.get('/me/cards/:boardID', w.invoke(function(Trello) {
-	return function(req, res) {
+		
+		return function(req, res) {
+	
+			Trello.get("/1/boards/" + req.params.boardID + "/cards?fields=name,idList,url", function(err, data) {
+				if (err) throw err;
 
-		Trello.get("/1/boards/" + req.params.boardID + "/cards?fields=name,idList,url", function(err, data) {
-			if (err) throw err;
-			
-			var feed = {
-			title: 'cards@' + req.params.boardID + '@trello',
-			cards: data
-			};
-
-			res.json(feed);
-		});
-	};
+				var feed = {
+						boardID: req.params.boardID,
+						cards: _.groupBy(data, 'idList')
+					};
+	
+				res.json(feed);
+			});
+		};
 }));
 
+/* GET lists from Trello board. */
+router.get('/me/lists/:boardID', w.invoke(function(Trello) {
+		
+		return function(req, res) {
+		
+			Trello.get("/1/boards/" + req.params.boardID + "/lists?cards=all&card_fields=name&fields=name", function(err, data) {
+				if (err) throw err;
+	
+				var count = [];
+
+				_.each(data, function(value, key, list) {
+					count.push({
+						listName: value.name,
+						cardCount: _.size(value.cards)
+					});
+				});
+
+				var feed = {
+					lists: _.groupBy(data, 'name'),
+					count: count
+				};
+
+				res.json(feed);
+			});
+		};
+}));
 
 //function isLoggedIn(req, res, next) {
 //
