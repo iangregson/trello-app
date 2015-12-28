@@ -1,0 +1,6 @@
+<div>This is the board view</div>
+<div>{{boardID}}</div>
+<div ng-repeat="list in lists track by $index">
+List: {{list.Key}} has {{list.Y}} cards.
+</div>
+<nvd3 options="options" data="lists"></nvd3>

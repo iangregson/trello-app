@@ -15,7 +15,7 @@
     "karma": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
     "test": "npm run unittest && npm run protractor",
-    "unittest": "npm run foreman & sleep 3s && mocha && npm run test-single-run && nf stop",
+    "unittest": "mocha && npm run test-single-run",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",

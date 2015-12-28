@@ -78,7 +78,7 @@ describe("Routes.trelloApi GET lists unit test",function(){
 
   // #1 should return json info about my trello lists
 
-  it("should return json message with a cards object",function(done){
+  it("should return json message with a lists object and a count object",function(done){
 
     // calling home page api
     server
@@ -90,6 +90,7 @@ describe("Routes.trelloApi GET lists unit test",function(){
       res.status.should.equal(200);
       // Error key should be false.
       res.body.lists.should.be.ok;
+      res.body.count.should.be.ok
       done();
     });
   });
@@ -117,22 +118,22 @@ describe("Routes.trelloApi GET login unit test",function(){
   //GET Login cb test
   // it should set a cookie with the token
 
-describe("Routes.trelloApi GET login callback unit test",function(){
-
-  it("should set a cookie with the access token",function(done){
-
-    // calling home page api
-    server
-    .get("/cb?oauth_token=2a9c2143473b08f93b3e585ae0df03e2&oauth_verifier=e701f2d28b5762e66201f4c49436b08b")
-    .expect("Content-type",/json/)
-    .expect(200) // THis is HTTP response
-    .expect("set-cookie", "token")
-    .end(function(err,res){
-      err.should.not.be.ok;
-      done();
-    });
-  });
-});
+//describe("Routes.trelloApi GET login callback unit test",function(){
+//
+//  it("should set a cookie with the access token",function(done){
+//
+//    // calling home page api
+//    server
+//    .get("/cb?oauth_token=2a9c2143473b08f93b3e585ae0df03e2&oauth_verifier=e701f2d28b5762e66201f4c49436b08b")
+//    .expect("Content-type",/json/)
+//    .expect(200) // THis is HTTP response
+//    .expect("set-cookie", "token")
+//    .end(function(err,res){
+//      err.should.not.be.ok;
+//      done();
+//    });
+//  });
+//});
 
   //Get Logout test
   // it should clear the cookie with the token
