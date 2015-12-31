@@ -12,7 +12,6 @@ angular.module("trelloApp.board", [ "ngAnimate", "ui.router", "trelloApp.service
       			$scope.boardID = $stateParams.boardID;
 
       			trelloApiService.lists($stateParams.boardID).success(function(data) {
-      				console.log(data);
       				$scope.lists = data.count;
       			});
 
@@ -35,37 +34,6 @@ angular.module("trelloApp.board", [ "ngAnimate", "ui.router", "trelloApp.service
 			                }
 			            }
 				};
-
-				$scope.data = [
-			            {
-			                Key: "One",
-			                Y: 5
-			            },
-			            {
-			                Key: "Two",
-			                Y: 2
-			            },
-			            {
-			                Key: "Three",
-			                Y: 9
-			            },
-			            {
-			                Key: "Four",
-			                Y: 7
-			            },
-			            {
-			                Key: "Five",
-			                Y: 4
-			            },
-			            {
-			                Key: "Six",
-			                Y: 3
-			            },
-			            {
-			                Key: "Seven",
-			                Y: 0.5
-			            }
-			        ];
    			}	
 		})
 	}])
