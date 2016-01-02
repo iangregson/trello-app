@@ -69,8 +69,8 @@ router.get('/me/lists/:boardID', w.invoke(function(Trello) {
 
 				_.each(data, function(value, key, list) {
 					count.push({
-						listName: value.name,
-						cardCount: _.size(value.cards)
+						Key: value.name,
+						Y: _.size(value.cards)
 					});
 				});
 
