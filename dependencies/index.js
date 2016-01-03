@@ -1,11 +1,11 @@
 //dependencies file for wagner set up
 
-module.exports = function(w) {
+module.exports = function(w, token) {
 
 	var trello = require('node-trello');
 
 	w.factory('Trello', function() {
-		return new trello(process.env.TRELLO_KEY, '2cf24a85a2ebe36f71a53d9019edbb72af9114585e2cf9013e2eef65f07c30c6');
+		return new trello(process.env.TRELLO_KEY, token);
 	});
 
 	w.factory('TrelloOAuth', function() {
