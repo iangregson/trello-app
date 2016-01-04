@@ -8,7 +8,8 @@ var w = require('wagner-core');
 
 var app = express();
 
-require('./dependencies')(w, '2cf24a85a2ebe36f71a53d9019edbb72af9114585e2cf9013e2eef65f07c30c6');
+require('./models')(w);
+require('./dependencies')(w);
 w.invoke(require('./auth'), { app: app });
 
 //concurrency fallback
