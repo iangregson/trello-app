@@ -9,14 +9,17 @@ var server = supertest.agent("http://dev.ian:5000");
 
 // UNIT test begin
 
+before(function(done) {
+  // connect to the database
+  mongoose.connect('mongodb://trelloapp2016:2016trelloapp4509@ds037195.mongolab.com:37195/trelloapp');
+  done();
+});
+
 describe("Routes.trelloApi", function() {
 
-  // within before() you can run all the operations that are needed to setup your tests. In this case
-  // I want to create a connection with the database, and when I'm done, I call done().
-  before(function(done) {
-    // In our tests we use the test db
-    mongoose.connect('mongodb://trelloapp2016:2016trelloapp4509@ds037195.mongolab.com:37195/trelloapp');
-    server.get("/cb?oauth_token=2a9c2143473b08f93b3e585ae0df03e2&oauth_verifier=e701f2d28b5762e66201f4c49436b08b");
+  beforeEach(function(done) {
+    // log in the test user
+    req.user.oauth.token = '2cf24a85a2ebe36f71a53d9019edbb72af9114585e2cf9013e2eef65f07c30c6';
     done();
   });
   // #1 should return home page
@@ -114,7 +117,7 @@ describe("Authentication unit tests",function(){
 
   //2 it should set a cookie with the token
 
-  it("/cb mochashould set a cookie with the access token",function(done){
+  it("/cb should set a cookie with the access token",function(done){
 
     // calling home page api
     server
