@@ -1,6 +1,7 @@
 var supertest = require("supertest");
 var should = require("should");
 var cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
 
 // This agent refers to PORT where program is runninng.
 
@@ -8,11 +9,19 @@ var server = supertest.agent("http://dev.ian:5000");
 
 // UNIT test begin
 
-describe("Routes.trelloApi GET root unit test",function(){
+describe("Routes.trelloApi", function() {
 
+  // within before() you can run all the operations that are needed to setup your tests. In this case
+  // I want to create a connection with the database, and when I'm done, I call done().
+  before(function(done) {
+    // In our tests we use the test db
+    mongoose.connect('mongodb://trelloapp2016:2016trelloapp4509@ds037195.mongolab.com:37195/trelloapp');
+    server.get("/cb?oauth_token=2a9c2143473b08f93b3e585ae0df03e2&oauth_verifier=e701f2d28b5762e66201f4c49436b08b");
+    done();
+  });
   // #1 should return home page
 
-  it("should return json message",function(done){
+  it("/trello-api/ should return json message",function(done){
 
     // calling home page api
     server
@@ -23,18 +32,14 @@ describe("Routes.trelloApi GET root unit test",function(){
       // HTTP status should be 200
       res.status.should.equal(200);
       // Error key should be false.
-      res.body.title.should.equal("trello-api");
+      res.body.id.should.be.ok;
       done();
     });
   });
 
-});
-
-describe("Routes.trelloApi GET me unit test",function(){
-
   // #1 should return home page
 
-  it("should return json message",function(done){
+  it("/trello-api/me should return json message",function(done){
 
     // calling home page api
     server
@@ -49,36 +54,28 @@ describe("Routes.trelloApi GET me unit test",function(){
       done();
     });
   });
-});
 
-describe("Routes.trelloApi GET cards unit test",function(){
+  // #2 should return json info about my trello boards
 
-  // #1 should return json info about my trello boards
-
-  it("should return json message with a cards object",function(done){
+  it("/trello-api/me/boards should return json message with a boards object",function(done){
 
     // calling home page api
     server
-    .get("/trello-api/me/cards/55a24b0e333f1efad9f26073")
+    .get("/trello-api/me/boards")
     .expect("Content-type",/json/)
     .expect(200) // THis is HTTP response
     .end(function(err,res){
       // HTTP status should be 200
       res.status.should.equal(200);
       // Error key should be false.
-      res.body.cards.should.be.ok;
+      res.body.boards.should.be.ok;
       done();
     });
   });
-});
 
-// get lists from trello
+  // #3 should return json info about my trello lists
 
-describe("Routes.trelloApi GET lists unit test",function(){
-
-  // #1 should return json info about my trello lists
-
-  it("should return json message with a lists object and a count object",function(done){
+  it("/trello-api/me/lists/:boardID should return json message with a lists object and a count object",function(done){
 
     // calling home page api
     server
@@ -94,15 +91,16 @@ describe("Routes.trelloApi GET lists unit test",function(){
       done();
     });
   });
+
 });
 
 
   // GET Login test
   // it should redirect to trello auth URL
 
-describe("Routes.trelloApi GET login unit test",function(){
+describe("Authentication unit tests",function(){
 
-  it("should redirect to the trello authorization page",function(done){
+  it("/login should redirect to the trello authorization page",function(done){
 
     // calling home page api
     server
@@ -113,27 +111,20 @@ describe("Routes.trelloApi GET login unit test",function(){
       done();
     });
   });
+
+  //2 it should set a cookie with the token
+
+  it("/cb mochashould set a cookie with the access token",function(done){
+
+    // calling home page api
+    server
+    .get("/cb?oauth_token=2a9c2143473b08f93b3e585ae0df03e2&oauth_verifier=e701f2d28b5762e66201f4c49436b08b")
+    .expect("Content-type",/json/)
+    .expect(200) // THis is HTTP response
+    .expect("set-cookie", "token")
+    .end(function(err,res){
+      err.should.not.be.ok;
+      done();
+    });
+  });
 });
-
-  //GET Login cb test
-  // it should set a cookie with the token
-
-//describe("Routes.trelloApi GET login callback unit test",function(){
-//
-//  it("should set a cookie with the access token",function(done){
-//
-//    // calling home page api
-//    server
-//    .get("/cb?oauth_token=2a9c2143473b08f93b3e585ae0df03e2&oauth_verifier=e701f2d28b5762e66201f4c49436b08b")
-//    .expect("Content-type",/json/)
-//    .expect(200) // THis is HTTP response
-//    .expect("set-cookie", "token")
-//    .end(function(err,res){
-//      err.should.not.be.ok;
-//      done();
-//    });
-//  });
-//});
-
-  //Get Logout test
-  // it should clear the cookie with the token

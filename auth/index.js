@@ -1,11 +1,72 @@
 //auth.js - do the authentication with trello
 
-function setupAuth(TrelloOAuth, app) {
+function setupAuth(User, app) {
 
+	var passport = require('passport');
+	var TrelloStrategy = require('passport-trello').Strategy;
 
-var oauth_secrets = {}; // to do - make this more permanent with Redis? Cookies?
+	// High level serialize/de-serialize configuration for passport
+	passport.serializeUser(function(user, done) {
+		done(null, user._id);
+	});
 
-	/* GET talk to login to Trello. */
+ 	passport.deserializeUser(function(id, done) {
+    	User.
+    		findOne({ _id : id }).
+    		exec(done);
+		});
+
+ 	passport.use(new TrelloStrategy(
+ 		{
+			consumerKey: process.env.TRELLO_KEY,
+    		consumerSecret: process.env.TRELLO_SECRET,
+    		callbackURL: process.env.HOSTNAME + "/cb",
+    		passReqToCallback: true,
+    		trelloParams: {
+    		    scope: "read,write",
+    		    name: process.env.APP_NAME,
+    		    expiration: "never"
+    		},
+ 		},
+ 		function(req, token, tokenSecret, profile, done) {
+ 			User.findOneAndUpdate(
+ 				{ 'profile.username': profile.id },
+ 				{
+ 					$set: {
+ 						'profile.username': profile.id,
+ 						'profile.displayName': profile.displayName,
+ 						'oauth.token': token
+ 					}
+ 				},
+ 				{ 'new': true, upsert: true, runValidators: true },
+ 				function(error, user) {
+ 					done(error, user);
+ 				});
+ 		}));
+
+ 	// Express middlewares
+	app.use(require('express-session')({
+    	secret: 'this is a secret'
+  	}));
+	app.use(passport.initialize());
+	app.use(passport.session());
+
+	// Express routes for auth
+	app.get('/login',
+    	passport.authenticate('trello'));
+
+	app.get('/cb',
+    	passport.authenticate('trello', { failureRedirect: '/fail' }),
+    	function(req, res) {
+    		res.cookie('token', req.user.oauth.token);
+      		res.redirect('/trello-api/me');
+    });
+
+}
+
+/* var oauth_secrets = {}; // to do - make this more permanent with Redis? Cookies?
+
+	// GET talk to login to Trello. 
 	app.get('/login', function(req, res) {
 		TrelloOAuth.getRequestToken(function(err, callback) {
 			oauth_secrets['token'] = callback.oauth_token;
@@ -35,6 +96,6 @@ var oauth_secrets = {}; // to do - make this more permanent with Redis? Cookies?
 		res.redirect('/');
 	});
 
-}
+} */
 
 module.exports = setupAuth
