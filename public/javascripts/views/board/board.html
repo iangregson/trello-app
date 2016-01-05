@@ -1,5 +1,5 @@
-<div>{{boardID}}</div>
-<div ng-repeat="list in lists track by $index">
-{{list.Key}} has {{list.Y}} cards.
+<div><h3>{{(vm.boardNames | filter: {id: vm.boardID})[0].name}}</h3></div>
+<div ng-repeat="list in vm.lists track by $index">
+<strong>{{list.Key}}</strong> has {{list.Y}} cards.
 </div>
-<nvd3 options="options" data="lists"></nvd3>
+<nvd3 options="vm.options" data="vm.lists"></nvd3>

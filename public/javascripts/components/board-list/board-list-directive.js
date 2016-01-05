@@ -1,6 +1,7 @@
 "use strict";
-angular.module("trelloApp.board-list.board-list-directive", ["trelloApp.services"])
-	.directive("boardList", function(trelloApiService) {
+var boardListDirective = angular.module("trelloApp.board-list.board-list-directive", []);
+
+boardListDirective.directive("boardList", [ "trelloApiService", function(trelloApiService) {
 		return {
 			restrict: "E",
 			templateUrl: "javascripts/components/board-list/index.html",
@@ -10,4 +11,4 @@ angular.module("trelloApp.board-list.board-list-directive", ["trelloApp.services
 				})
 			}
 		}
-	});
+	}]);

@@ -45,9 +45,9 @@ router.get('/me/boards', function(req, res) {
 			Trello.get("/1/members/me", { boards: "all", board_fields: "name" }, function(err, data) {
 				if (err) throw err;
 	
-					var boards = _.groupBy(data.boards, 'id');
+					//var boards = _.groupBy(data.boards, 'id');
 	
-					res.json(boards);
+					res.json(data.boards);
 				});
 
 	}, { token: req.user.oauth.token });

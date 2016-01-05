@@ -1,21 +1,31 @@
 "use strict";
-angular.module("trelloApp.board", [ "ngAnimate", "ui.router", "trelloApp.services", "nvd3" ] )
-	.config( ["$stateProvider", function($stateProvider, $stateParams, trelloApiService) {
+var trelloAppBoard = angular.module("trelloApp.board", [ "ngAnimate", "ui.router", "trelloApp.services", "nvd3" ] );
+trelloAppBoard.config( ["$stateProvider", function($stateProvider, $stateParams, trelloApiService) {
 		
 		$stateProvider
 
 		.state("board", {
 			url: "/board/:boardID",
 			templateUrl:"javascripts/views/board/board.html",
-			controller: function($stateParams, $scope, trelloApiService) {
+			controller: "boardCtrl as vm"
+		})
+	}]);
+
+trelloAppBoard.controller("boardCtrl", [ "$stateParams", "$scope", "trelloApiService", function($stateParams, $scope, trelloApiService) {
       			
-      			$scope.boardID = $stateParams.boardID;
+      			var vm = this;
+
+      			vm.boardID = $stateParams.boardID;
 
       			trelloApiService.lists($stateParams.boardID).success(function(data) {
-      				$scope.lists = data.count;
+      				vm.lists = data.count;
       			});
 
-				$scope.options = {
+      			trelloApiService.boards().success(function(data) {
+      				vm.boardNames = data;
+      			});
+
+				vm.options = {
 					chart: {
 			                type: 'pieChart',
 			                height: 500,
@@ -34,9 +44,4 @@ angular.module("trelloApp.board", [ "ngAnimate", "ui.router", "trelloApp.service
 			                }
 			            }
 				};
-   			}	
-		})
-	}])
-	.controller("boardCtrl", function() {
-
-	});
+   			}]);

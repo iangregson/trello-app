@@ -59,7 +59,7 @@ function setupAuth(User, app) {
     	passport.authenticate('trello', { failureRedirect: '/fail' }),
     	function(req, res) {
     		res.cookie('token', req.user.oauth.token);
-      		res.redirect('/trello-api/me');
+      		res.redirect('/#/');
     });
 
 }
