@@ -1,8 +1,9 @@
 <nav>
 	<div>
-		<ul>
-			<li><a ng-href="#/">Trello App</a></li>
-			<li><a href="/login">Login</a></li>
-		</ul>
+		<h5><ul>
+				<li><a ng-href="#/">Trello App</a></li>
+				<li ng-show="!user"><a href="/login">Login</a></li>
+				<li ng-show="user">Welcome, {{user}}</li>
+		</h5></ul>
 	</div>
 </nav>

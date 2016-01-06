@@ -1,5 +1,5 @@
 "use strict";
-var boardListDirective = angular.module("trelloApp.board-list.board-list-directive", []);
+var boardListDirective = angular.module("trelloApp.board-list.board-list-directive", [ "trelloApiService" ]);
 
 boardListDirective.directive("boardList", [ "trelloApiService", function(trelloApiService) {
 		return {

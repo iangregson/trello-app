@@ -1,5 +1,5 @@
 "use strict";
-var trelloApiService = angular.module("trelloApp.services", []);
+var trelloApiService = angular.module("trelloApiService", []);
 
 trelloApiService.factory("trelloApiService", [ "$http", function($http) {
 	return {
