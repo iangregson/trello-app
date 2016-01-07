@@ -1,18 +1,30 @@
 # trello-app
 
-Create Procfile_dev with environment variables
+Create .env and Procfile_dev with environment variables:
 
-npm run dev to get started
+ - APP_NAME
+ - TRELLO_KEY
+ - TRELLO_SECRET
+ - HOSTNAME
+ - DB
 
-npm start runs the app in production mode
+If deploying, these config vars need set in the Heroku dashboard.
+
+---------------
+
+**npm run dev** to start dev environment
+
+**webpack -p && npm start** to run production environment
 
 Both need Heroku's foreman (npm run getheroku)
 
 ---------------
 
-If deploying, you need to set environment / config variables in Heroku: 
+#To Do
 
-APP_NAME
-TRELLO_KEY
-TRELLO_SECRET
-HOSTNAME
+ - Fix Mocha unit tests previously passing with hardcoded credentials by logging the user in beforeEach test
+ - Implement html2js so directives can be properly tested
+ - Karma tests updated to match all views and components
+ - Protractor tests updated for e2e testing
+ - Update scripts in package.json to create proper build workflow
+ - Better front end styling and interactions
