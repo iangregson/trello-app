@@ -1,11 +1,10 @@
 # trello-app
 
-http://radiant-escarpment-6232.herokuapp.com/[1]
-[1] http://radiant-escarpment-6232.herokuapp.com/
+Angularjs single page app over Node, Express and express api that displays summary information about Trello boards.
+
+http://radiant-escarpment-6232.herokuapp.com/
 
 ---------------
-
-# Running
 
 Create .env and Procfile_dev with environment variables:
 
