@@ -1,6 +1,6 @@
-# trello-app
+2# trello-app
 
-Angularjs single page app over Node, Express and express api that displays summary information about Trello boards.
+Angularjs single page app over node and express that displays summary information about Trello boards.
 
 http://radiant-escarpment-6232.herokuapp.com/
 
@@ -28,6 +28,7 @@ Both need Heroku's foreman (npm run getheroku)
 
 #To Do
 
+ - Break board view into two directives
  - Fix Mocha unit tests previously passing with hardcoded credentials by logging the user in beforeEach test
  - Implement html2js so directives can be properly tested
  - Karma tests updated to match all views and components

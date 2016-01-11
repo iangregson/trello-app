@@ -1,9 +1,144 @@
 /* Colours */
 @light-grey: #DFDFE5;
 @dark-grey: #2C2C2D;
+@body-copy-color: #222;
+@link-colour: #0F98C1;
+
+/* Globals */
+a {
+	display: inline-block;
+	text-decoration: none;
+	color: @link-colour;
+	letter-spacing: 0.2rem;
+	cursor: pointer;
+
+	&:hover,:focus,:active {
+		/* smoothen transitions */
+		-webkit-transition: all 250ms ease-in-out;
+		-moz-transition: all 250ms ease-in-out;
+		transition: all 250ms ease-in-out;
+	
+		-webkit-transform: translateY(-0.2rem);
+		-moz-transform: translateY(-0.2rem);
+		transform: translateY(-0.2rem);
+
+	}
+}
+
+/* mixins */
+.BoxShadowHelper(@level: 1){
+    & when (@level = 1) {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    & when (@level = 2) {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+    & when (@level = 3) {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+    & when (@level = 4) {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+    & when (@level = 5) {
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
+.LiftHelper(@level: 1){
+
+	/* smoothen transitions */
+	-webkit-transition: all 250ms ease-in-out;
+	-moz-transition: all 250ms ease-in-out;
+	transition: all 250ms ease-in-out;
+
+    & when (@level = 1) {
+    	-webkit-transform: translateY(-0.2rem);
+		-moz-transform: translateY(-0.2rem);
+		transform: translateY(-0.2rem);     
+    }
+    & when (@level = 2) {
+    	-webkit-transform: translateY(-0.4rem);
+		-moz-transform: translateY(-0.4rem);
+		transform: translateY(-0.4rem);     
+    }
+    & when (@level = 3) {
+    	-webkit-transform: translateY(-0.6rem);
+		-moz-transform: translateY(-0.6rem);
+		transform: translateY(-0.6rem);     
+    }
+}
+
+.SlideHelper(@direction: 1) {
+
+	@-webkit-keyframes slideInDown {
+	  from {
+	    -webkit-transform: translate3d(0, -100%, 0);
+	    transform: translate3d(0, -100%, 0);
+	    visibility: visible;
+	  }
+
+	  to {
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+
+	@keyframes slideInDown {
+	  from {
+	    -webkit-transform: translate3d(0, -100%, 0);
+	    transform: translate3d(0, -100%, 0);
+	    visibility: visible;
+	  }
+
+	  to {
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+
+	@-webkit-keyframes slideInUp {
+	  from {
+	    -webkit-transform: translate3d(0, 100%, 0);
+	    transform: translate3d(0, 100%, 0);
+	    visibility: visible;
+	  }
+
+	  to {
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+
+	@keyframes slideInUp {
+	  from {
+	    -webkit-transform: translate3d(0, 100%, 0);
+	    transform: translate3d(0, 100%, 0);
+	    visibility: visible;
+	  }
+
+	  to {
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+
+	& when (@direction = 1) {
+	    -webkit-animation-name: slideInDown;
+  		animation-name: slideInDown;		
+	}
+
+	& when (@direction = 2) {
+	    -webkit-animation-name: slideInUp;
+  		animation-name: slideInUp;		
+	}
+}
+
+
+
 
 /* modules */
 @import "skeleton"; /* responsive grid and basic styles */
 @import "../javascripts/views/view-form/form-view-styles"; /* form styles */
 @import "../bower/nvd3/build/nv.d3.min.css"; /* D3 styles */
 @import "../javascripts/components/nav/nav"; /* nav styles */
+@import "../javascripts/components/board-list/board-list";

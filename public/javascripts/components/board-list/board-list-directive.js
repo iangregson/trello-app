@@ -3,7 +3,7 @@ var boardListDirective = angular.module("trelloApp.board-list.board-list-directi
 
 boardListDirective.directive("boardList", [ "trelloApiService", function(trelloApiService) {
 		return {
-			restrict: "E",
+			restrict: "EA",
 			templateUrl: "javascripts/components/board-list/index.html",
 			link: function(scope, elm, attrs) {
 				trelloApiService.me().success(function(data) {

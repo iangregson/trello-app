@@ -7,6 +7,7 @@ angular.module('trelloApp', [
   'trelloApp.services',
   'trelloApp.board-list.board-list-directive',
   'trelloApp.board',
+  'trelloApp.board.directives',
   'nvd3',
   'trelloApp.nav'
 ])

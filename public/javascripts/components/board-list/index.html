@@ -1,3 +1,3 @@
-<div ng-repeat="board in boards">
-	<a ng-href="#/board/{{board.id}}"><h3>{{board.name}}</h3></a>
+<div class="board-list" ng-show="boards[0]">
+		<a class="board-list-item" ng-repeat="board in boards" ng-href="#/board/{{board.id}}"><h3>{{board.name}}</h3></a>
 </div>
