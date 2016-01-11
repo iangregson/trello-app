@@ -22,7 +22,7 @@ If deploying, these config vars need set in the Heroku dashboard.
 
 **webpack -p && npm start** to run production environment
 
-Both need Heroku's foreman (npm run getheroku)
+Both need Heroku's foreman
 
 ---------------
 
