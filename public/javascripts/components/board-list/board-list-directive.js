@@ -8,7 +8,8 @@ boardListDirective.directive("boardList", [ "trelloApiService", function(trelloA
 			link: function(scope, elm, attrs) {
 				trelloApiService.me().success(function(data) {
 					scope.boards = data.boards;
-				})
+				});
+				
 			}
 		}
 	}]);
