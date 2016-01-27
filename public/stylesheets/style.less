@@ -1,3 +1,6 @@
+/* Imports */
+@import "modules";
+
 /* Colours */
 @light-grey: #DFDFE5;
 @dark-grey: #2C2C2D;
@@ -67,78 +70,3 @@ a {
 		transform: translateY(-0.6rem);     
     }
 }
-
-.SlideHelper(@direction: 1) {
-
-	@-webkit-keyframes slideInDown {
-	  from {
-	    -webkit-transform: translate3d(0, -100%, 0);
-	    transform: translate3d(0, -100%, 0);
-	    visibility: visible;
-	  }
-
-	  to {
-	    -webkit-transform: translate3d(0, 0, 0);
-	    transform: translate3d(0, 0, 0);
-	  }
-	}
-
-	@keyframes slideInDown {
-	  from {
-	    -webkit-transform: translate3d(0, -100%, 0);
-	    transform: translate3d(0, -100%, 0);
-	    visibility: visible;
-	  }
-
-	  to {
-	    -webkit-transform: translate3d(0, 0, 0);
-	    transform: translate3d(0, 0, 0);
-	  }
-	}
-
-	@-webkit-keyframes slideInUp {
-	  from {
-	    -webkit-transform: translate3d(0, 100%, 0);
-	    transform: translate3d(0, 100%, 0);
-	    visibility: visible;
-	  }
-
-	  to {
-	    -webkit-transform: translate3d(0, 0, 0);
-	    transform: translate3d(0, 0, 0);
-	  }
-	}
-
-	@keyframes slideInUp {
-	  from {
-	    -webkit-transform: translate3d(0, 100%, 0);
-	    transform: translate3d(0, 100%, 0);
-	    visibility: visible;
-	  }
-
-	  to {
-	    -webkit-transform: translate3d(0, 0, 0);
-	    transform: translate3d(0, 0, 0);
-	  }
-	}
-
-	& when (@direction = 1) {
-	    -webkit-animation-name: slideInDown;
-  		animation-name: slideInDown;		
-	}
-
-	& when (@direction = 2) {
-	    -webkit-animation-name: slideInUp;
-  		animation-name: slideInUp;		
-	}
-}
-
-
-
-
-/* modules */
-@import "skeleton"; /* responsive grid and basic styles */
-@import "../javascripts/views/view-form/form-view-styles"; /* form styles */
-@import "../bower/nvd3/build/nv.d3.min.css"; /* D3 styles */
-@import "../javascripts/components/nav/nav"; /* nav styles */
-@import "../javascripts/components/board-list/board-list";
