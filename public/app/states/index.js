@@ -13,7 +13,7 @@ module.exports = function($stateProvider, $urlRouterProvider) {
 		})
 		.state("board", {
 			url: "/board/:boardID",
-			template:"<board-details></board-details><nvd3 options='vm.options' data='vm.lists'></nvd3><p>Data:{{vm.lists}}</p>",
+			template:"<board-details></board-details><nvd3 options='vm.options' data='vm.lists'></nvd3>",
 			controller: "boardCtrl as vm"
 		});
 

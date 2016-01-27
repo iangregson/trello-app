@@ -3,31 +3,30 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "clean": "rimraf ./public/build",
+    "clean": "rimraf ./public/build/*",
     "start": "nf start",
     "foreman": "nf start web=1 -j Procfile_dev -p 5000",
     "predev": "npm install && npm run lint",
-    "dev": "parallelshell 'npm run foreman' 'npm run livereload'",
+    "dev": "parallelshell 'npm run watchify' 'npm run templates' 'npm run foreman' 'npm run livereload'",
     "livereload": "live-reload --port 9091 .",
     "postinstall": "bower install",
-    "prestart": "npm install",
+    "prestart": "npm install && npm run buildjs && npm run templates",
     "pretest": "npm install && npm run lint",
-    "karma": "karma start karma.conf.js",
-    "test-single-run": "karma start karma.conf.js  --single-run",
-    "test": "npm run unittest && npm run protractor",
-    "unittest": "mocha && npm run test-single-run",
+    "karma": "karma start karma.conf.js --single-run",
+    "test": "",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
-    "protractor": "npm run foreman & sleep 3s && protractor e2e-tests/protractor.conf.js && nf stop",
-    "prebuildjs": "npm run lint && npm run unittest",
-    "buildjs": "webpack -p",
+    "protractor": "protractor e2e-tests/protractor.conf.js",
+    "prebuildjs": "npm run lint && npm test && npm run clean",
+    "buildjs": "browserify ./public/app/app.js --outfile ./public/build/bundle.js",
     "lint": "jshint ./public/**/*.js",
     "presave": "npm run unittest",
     "prepatch": "npm run unittest",
     "save": "git add . -A && git commit && git push -u github master",
     "patch": "git add . -A && git commit -m 'version patch' && npm version patch && git push -u github master && git push heroku master",
-    "watchify": "watchify ./public/app/app.js --outfile ./public/build/bundle.js"
+    "watchify": "watchify ./public/app/app.js --outfile ./public/build/bundle.js",
+    "templates": "gulp buildtemplates"
   },
   "engines": {
     "node": "4.2.1"
@@ -37,7 +36,6 @@
     "angular-ui-router": "0.2.17",
     "body-parser": "~1.10.1",
     "bower": "1.4.2",
-    "browserify": "13.0.0",
     "connect-flash": "0.1.1",
     "cookie-parser": "~1.3.3",
     "debug": "~2.1.1",
@@ -57,8 +55,11 @@
     "wagner-core": "0.2.0"
   },
   "devDependencies": {
+    "browserify": "13.0.0",
     "browserify-ng-html2js": "1.1.5",
+    "browserify-shim": "3.8.12",
     "gulp": "3.9.0",
+    "gulp-browserify": "0.5.1",
     "gulp-concat": "2.6.0",
     "gulp-ng-html2js": "0.2.2",
     "jasmine-core": "2.3.4",
@@ -78,8 +79,17 @@
     "shelljs": "0.5.3",
     "should": "7.1.1",
     "supertest": "1.1.0",
-    "vinyl-source-stream": "1.1.0",
-    "watchify": "3.7.0",
-    "webpack": "1.12.9"
+    "watchify": "3.7.0"
+  },
+  "browser": {
+    "d3": "./public/bower/d3/d3.js",
+    "nvd3": "./public/bower/nvd3/build/nv.d3.js"
+  },
+  "browserify-shim": {
+    "d3": "d3",
+    "nvd3": "nv"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
   }
 }

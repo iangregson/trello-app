@@ -6,7 +6,10 @@ var services = require('./components/services');
 // dependencies
 var _ = require('lodash');
 var angular = require('angular');
+var d3 = require('d3');
+var nv = require('nvd3');
 require('angular-ui-router');
+require('angular-nvd3');
 require('./components/templates');
 // put d3.js in here
 
