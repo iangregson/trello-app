@@ -44,7 +44,8 @@ describe('/ main routes', function() {
     app.set('views', path.join(__dirname, '../views'));
     app.set('view engine', 'ejs');
 
-    app.use(require('../routes'));
+    app.use('/', require('../routes'));
+    app.use('/trello-api/', require('../routes/trelloApi'));
 
     server = app.listen(5000);
   });
@@ -126,7 +127,7 @@ describe('/ main routes', function() {
   });
 
   after(function(done) {
-    if (succeeded >= 2) {
+    if (succeeded >= 3) {
       console.log("Success!!!");
       done();
     } else {
