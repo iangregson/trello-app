@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('my-seed-app:server');
+var debug = require('debug')('trello-app:server');
 var http = require('http');
 
 /**

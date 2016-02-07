@@ -1,4 +1,12 @@
-<div><h3>{{(vm.boardNames | filter: {id: vm.boardID})[0].name}}</h3></div>
-<div ng-repeat="list in vm.lists track by $index">
-<strong>{{list.Key}}</strong> has {{list.Y}} cards.
+<div class="board-details title">
+	<h1>
+		<i class="fa fa-trello"></i>
+	</h1>
+	<h3>  {{(vm.boardNames | filter: {id: vm.boardID})[0].name}}</h3>
+	<a class="board-details back-button" ng-href="/">
+		<i class="fa fa-arrow-left"></i> Back
+	</a>
+</div>
+<div class="board-details details" ng-repeat="list in vm.lists track by $index">
+	<strong>{{list.Key}}</strong> has {{list.Y}} cards.
 </div>

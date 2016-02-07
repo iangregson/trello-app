@@ -20,7 +20,9 @@ If deploying, these config vars need set in the Heroku dashboard.
 
 **npm run dev** to start dev environment
 
-**webpack -p && npm start** to run production environment
+**npm test** for unit tests
+
+**npm start** to run production environment
 
 Both need Heroku's foreman
 

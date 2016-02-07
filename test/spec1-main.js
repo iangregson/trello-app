@@ -9,7 +9,6 @@ var URL_ROOT = 'http://dev.ian:5000';
 describe('/ main routes', function() {
   var server;
   var app;
-  var succeeded = 0;
 
   var Config;
   var User;
@@ -17,7 +16,7 @@ describe('/ main routes', function() {
   before(function() {
     app = express();
 
-    // Bootstrap server
+    // Bootstrap server 
     dependencies = require('../dependencies')(wagner);
     models = require('../models')(wagner);
 
@@ -32,20 +31,11 @@ describe('/ main routes', function() {
     Config = deps.Config;
     User = deps.User;
 
-    app.use(function(req, res, next) {
-      User.findOne({}, function(error, user) {
-        assert.ifError(error);
-        req.user = user;
-        next();
-      });
-    });
-
     // view engine setup
     app.set('views', path.join(__dirname, '../views'));
     app.set('view engine', 'ejs');
 
     app.use('/', require('../routes'));
-    app.use('/trello-api/', require('../routes/trelloApi'));
 
     server = app.listen(5000);
   });
@@ -55,31 +45,6 @@ describe('/ main routes', function() {
     server.close();
   });
 
-  beforeEach(function(done) {
-    User.remove({}, function(error) {
-      assert.ifError(error);
-      done();
-    });
-  });
-
-  beforeEach(function(done) {  
-
-    var users = [{
-      profile: {
-        username: 'test-user',
-        displayName: 'Test User'
-      },
-      oauth: {
-          token: '1a9cda1ae015e92a9101e0405cc9ab42df85222c17971295c9108640c77a1dec'
-      }
-    }];
-
-
-    User.create(users, function(error) {
-      assert.ifError(error);
-      done();
-    });
-  });
 
   it('can get a JSON response form /config', function(done) {
 
@@ -101,7 +66,6 @@ describe('/ main routes', function() {
           result = JSON.parse(res.text);
         });
 
-        ++succeeded;
         done();
       });
   });
@@ -121,18 +85,8 @@ describe('/ main routes', function() {
         //Response has a body
         assert.ok(res.body);
 
-        ++succeeded;
         done();
       });
-  });
-
-  after(function(done) {
-    if (succeeded >= 3) {
-      console.log("Success!!!");
-      done();
-    } else {
-      done();
-    }
   });
 
 });

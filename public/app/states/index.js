@@ -8,7 +8,7 @@ module.exports = function($stateProvider, $urlRouterProvider) {
 		
 		.state("home", {
 			url: "/home",
-			template:"<h1>{{vm.message}}</h1><nav-bar></nav-bar>",
+			template:"<nav-bar></nav-bar>",
 			controller: "homeCtrl as vm"
 		})
 		.state("board", {

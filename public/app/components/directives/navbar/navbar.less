@@ -1,6 +1,45 @@
 /* nav styles */
 nav {
-	li {
-		display: inline-block;
+	
+	text-align: center;
+
+	.login {
+
+		margin: 10em auto 1em;
+		border: 2px dashed @dark-grey;
+		padding: 1em;
+		border-radius: 1rem;
+		text-align: center;
+		max-width: 25em;
+
+		transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+
+		li {
+			display: inline-block;
+			margin-bottom: 0;
+			margin-top: 2rem;
+		}
+
+		ul {
+			margin-bottom: 0;
+		}
+
+		div {
+
+		}
+
+		img {
+			width: 100%;
+		}
+
+	}
+
+	.mini {
+		max-width: 15em;
+		margin: 1em auto 1em;
+
+		li {
+			margin-top: 0;
+		}
 	}
 }
