@@ -1,5 +1,0 @@
-<div class="button toggle toggle-open" ng-click="toggle = !toggle" ng-show="!toggle">Board list</div>
-<div class="button toggle toggle-close" ng-click="toggle = !toggle" ng-show="toggle">Hide board list</div>
-<div class="board-list" ng-show="toggle" ng-click="toggle = !toggle">
-		<a class="board-list-item" ng-repeat="board in boards" ng-href="#/board/{{board.id}}"><h3>{{board.name}}</h3></a>
-</div>

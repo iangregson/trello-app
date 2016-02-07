@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 
 module.exports = function(w) {
-	mongoose.connect(process.env.DB);
+	w.invoke(function(Config) {
+		mongoose.connect(Config.db);
+	});
 
 	w.factory('db', function() {
 		return mongoose;

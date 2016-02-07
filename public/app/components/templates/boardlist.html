@@ -1,0 +1,5 @@
+<div class="button toggle toggle-open" ng-click="toggle = !toggle" ng-show="!toggle"><i class="fa fa-trello"></i> Show board list</div>
+<div class="button toggle toggle-close" ng-click="toggle = !toggle" ng-show="toggle"><i class="fa fa-arrow-left"></i> Hide board list</div>
+<div class="board-list" ng-show="toggle" ng-click="toggle = !toggle">
+		<a class="board-list-item" ng-repeat="board in boards" ng-href="#/board/{{board.id}}"><h5>{{board.name}}</h5></a>
+</div>

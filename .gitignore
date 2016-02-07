@@ -5,3 +5,4 @@ node_modules
 .trello
 .env
 Procfile_dev
+/config/dev.js

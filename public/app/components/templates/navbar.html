@@ -1,0 +1,10 @@
+<nav>
+	<div class="login" ng-class="{mini: user}">
+		<img src="images/trello-logo.png">
+		<ul>
+			<li ng-show="!user"><a class="button" href="/login">Login to Trello</a></li>
+			<li ng-show="user">Welcome, {{user}}</li>
+		</ul>
+	</div>
+	<div ng-show="user"><board-list></board-list></div>
+</nav>

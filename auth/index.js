@@ -1,6 +1,6 @@
 //auth.js - do the authentication with trello
 
-function setupAuth(User, app) {
+function setupAuth(User, Config, app) {
 
 	var passport = require('passport');
 	var TrelloStrategy = require('passport-trello').Strategy;
@@ -18,13 +18,13 @@ function setupAuth(User, app) {
 
  	passport.use(new TrelloStrategy(
  		{
-			consumerKey: process.env.TRELLO_KEY,
-    		consumerSecret: process.env.TRELLO_SECRET,
-    		callbackURL: process.env.HOSTNAME + "/cb",
+			consumerKey: Config.trelloKey,
+    		consumerSecret: Config.trelloSecret,
+    		callbackURL: Config.hostname + "/cb",
     		passReqToCallback: true,
     		trelloParams: {
     		    scope: "read,write",
-    		    name: process.env.APP_NAME,
+    		    name: Config.appName,
     		    expiration: "never"
     		},
  		},

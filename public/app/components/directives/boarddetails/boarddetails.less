@@ -1,0 +1,46 @@
+@trello-blue: #0079BF;
+
+svg {
+	margin-top: 2rem;
+}
+
+.board-details {
+
+	&.title {
+
+		max-width: 15em;
+		margin-bottom: 2rem;
+
+		h1, h3 {
+			display: inline;
+		}
+		
+		.fa {
+			color: @trello-blue;
+		}
+	}
+
+	&.details {
+
+	}
+
+	&.back-button {
+		position: absolute;
+		top: 1em;
+		right: 1em;
+		color: @dark-grey;
+
+		.fa {
+			color: @dark-grey;
+		}
+	}
+
+}
+
+@media (min-width: 600px) {
+	.board-details {
+		&.title {
+			max-width: 40em;
+		}
+	}
+}

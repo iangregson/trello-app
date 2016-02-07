@@ -10,4 +10,13 @@ router.get('/', function(req, res) {
 	});
 });
 
+router.get('/config', function(req, res) {
+	res.json({
+  		title: 'trelloApp',
+  		env: process.env.NODE_ENV,
+  		appName: process.env.APP_NAME,
+      hostname: process.env.HOSTNAME
+	});
+});
+
 module.exports = router;

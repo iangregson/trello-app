@@ -91,7 +91,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the login
-    res.redirect('/login');
+    res.send('Unauthoized. Please log in.');
 }
 
 }
